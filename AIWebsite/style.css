@@ -1,0 +1,103 @@
+.headerBan {
+    background-color:  indianred;
+    margin: 0;
+    height: 40vh;
+}
+
+.font-effect-3d-float {
+  text-shadow: 0 0.032em 0 #b0b0b0, 0px 0.15em 0.11em rgba(0,0,0,0.15), 0px 0.25em 0.021em rgba(0,0,0,0.1), 0px 0.32em 0.32em rgba(0,0,0,0.1);
+  color: #fff;
+}
+
+.block {
+    width: 100%;
+    text-align: center;
+    margin-top: -18vh;
+}
+
+#object {
+    -webkit-box-shadow: 2px 24px 50px -42px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 24px 50px -42px rgba(0,0,0,0.75);
+    box-shadow: 2px 24px 50px -42px rgba(0,0,0,0.75);
+     display: inline-block;
+}
+
+.input_wrapper{
+    padding-top: 2vh;
+}
+
+.topler{
+    font-family: 'Mukta Malar', sans-serif;
+    padding-left: 4vw;
+}
+
+#topler {
+    color: white;
+    padding-top: 2vh;
+    font-size: 5vh;
+}
+
+#result {
+    color: indianred;
+}
+
+ @media only screen and (min-device-width: 1200px) {
+
+    .show-mobile {
+        display: none;
+    }
+    .hide-mobile {
+        display: block;
+    }
+    .block {
+      padding-top: 8vh;
+      padding-left: 35vw;
+      padding-right: 35vw;
+    }
+ }
+
+@media screen and (max-width: 1200px) {
+    #object {
+        -webkit-box-shadow: 2px 24px 50px -22px rgba(0,0,0,0.75);
+        -moz-box-shadow: 2px 24px 50px -22px rgba(0,0,0,0.75);
+        box-shadow: 2px 24px 50px -22px rgba(0,0,0,0.75);
+         display: inline-block;
+    }
+    .block {
+        padding-top: 5vh;
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+    .dropdown {
+        width: 40vw;
+        height: 3vh;
+        margin-left: 4vw;
+        margin-right: 4vw;
+        font-size: 2vh;
+    }
+    .button {
+        width: 50vw;
+    }
+    #header {
+        font-size: 2.5vh;
+        margin-bottom: 2vh;
+        margin-top: 1vh;
+    }
+    #inner {
+        font-size: 2vh;
+        font-weight: bolder;
+        margin-bottom: 4vh;
+    }
+
+    .ui.selection.dropdown .menu>.item {
+        font-size: 2vh;
+    }
+    .ui.selection.dropdown .menu {
+        max-height: 50.68571429rem;
+    }
+
+    #result {
+        font-size: 5vh;
+    }
+}
+

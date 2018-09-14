@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="semantic.min.css">
+	<script src="jquery.min.js"></script>
+	<script type="text/javascript" src="semantic.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Mukta+Malar&effect=3d|3d-float|outline" rel="stylesheet">
+	<title>Genme</title>
+</head>
+<body>
+    <div class="headerBan">
+            <h1 class="ui center aligned topler" id="topler">GENmeTHAT</h1>
+    </div>
+    <!-- Photo by Jeremy Thomas on Unsplash -->
+
+    <div class="logo"></div>
+
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <i class="hand point up icon"></i>
+            No language stated.
+        </div>
+        <div class="content">
+            <p>You didn't choose a language, please select one.</p>
+        </div>
+        <div class="actions">
+            <div class="ui green ok inverted button">
+              <i class="checkmark icon"></i>
+              okay
+            </div>
+        </div>
+    </div>
+
+	<div class="block">
+        <div class="ui red circular segment center aligned" id="object">
+            <div class="ui red center aligned medium header" id="header">Generate names!</div>
+            <div class="ui selection dropdown">
+                <div class="text">Select a language</div>
+            </div>
+            <br class="show-mobile">
+            <button class="ui red basic button" id="inner">
+              Get
+            </button>
+        </div>
+
+        <h2 class="ui header" id="result"></h2>
+    </div>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

@@ -20,4 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/generate/', generator.views.genName.as_view(), name='generator'),
     path('api/languages/', generator.views.GetLanguages.as_view(), name='languages'),
+    path('api/train/', generator.views.trainGenerator.as_view(), name='trainName'),
+    path('api/status/', generator.views.GetTrainingStatus.as_view(), name='status'),
+    path('api/load_model/', generator.views.LoadModel.as_view(), name='load_model'),
 ]

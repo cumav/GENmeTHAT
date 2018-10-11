@@ -16,9 +16,7 @@ from model import *
 from generator.models import *
 
 max_length = 20
-# all_categories = ['Arabic', 'Chinese', 'Czech', 'Dutch', 'English', 'French', 'German', 'Greek', 'Irish', 'Italian', 'Japanese', 'Korean', 'Polish', 'Portuguese', 'Russian', 'Scottish', 'Spanish', 'Vietnamese']
-# p2 = Categories(categories='names', id=1)
-# p2.save()
+
 splitter = ","
 all_letters = string.ascii_letters + " .,;'-"
 n_letters = len(all_letters) + 1
@@ -147,7 +145,7 @@ class genName(APIView):
             global spread
             spread = int(_spread)
         except:
-            res = {"code": 400, "message": "Please specify a spread. Spread increases randomness in the prediction."}
+            res = {"code": 404, "message": "Please specify a spread. Spread increases randomness in the prediction."}
             return Response(data=json.dumps(res), status=status.HTTP_404_NOT_FOUND)
         # if language not in all_categories:
         #     res = {"code": 400, "message": "Not able to use this language."}
@@ -159,7 +157,11 @@ class genName(APIView):
         all_categories = []
         all_categories.append(category)
         n_categories = len(all_categories)
-        name = samples(category, random.choice(string.ascii_letters).upper())
+        try:
+            name = samples(category, random.choice(string.ascii_letters).upper())
+        except NameError:
+            res = {"code": 404, "message": "No model found. Please load a model!"}
+            return Response(data=res, status=status.HTTP_404_NOT_FOUND)
         name_gen = nameGenSerializer(data={"language":category, "name": name})
         name_gen.is_valid()
         return Response(name_gen.data)
@@ -205,7 +207,7 @@ class trainGenerator(APIView):
             if iter % plot_every == 0:
                 all_losses.append(total_loss / plot_every)
                 total_loss = 0
-        torch.save(rnn, "model.pkl")
+        torch.save(rnn, "generator/model.pkl")
         cat = Categories(id=1, categories=category)
         cat.save()
         return Response(data={"successfully trained and saved model."}, status=status.HTTP_200_OK)
@@ -226,7 +228,7 @@ class LoadModel(APIView):
     def get(self, request):
         try:
             global the_model
-            the_model = torch.load("model.pkl")
+            the_model = torch.load("generator/model.pkl")
             return Response(data={"successfully loaded model."}, status=status.HTTP_200_OK)
         except Exception:
             return Response(data={"unable to load model."}, status=status.HTTP_404_NOT_FOUND)

@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/train/', generator.views.trainGenerator.as_view(), name='trainName'),
     path('api/status/', generator.views.GetTrainingStatus.as_view(), name='status'),
     path('api/load_model/', generator.views.LoadModel.as_view(), name='load_model'),
+    path('api/get_train_data/', generator.views.currentTrainingData.as_view(), name='load_model'),
 ]

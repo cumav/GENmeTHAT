@@ -17,7 +17,7 @@ from generator.models import *
 
 max_length = 20
 
-splitter = ","
+
 all_letters = string.ascii_letters + " .,;'-"
 n_letters = len(all_letters) + 1
 
@@ -170,11 +170,20 @@ class genName(APIView):
 class trainGenerator(APIView):
 
     def post(self, request):
-        data = request.data["data"]
-        category = request.data["category"]
 
         global all_categories
         global n_categories
+        global splitter
+        global rnn
+
+        try:
+            data = request.data["data"]
+            category = request.data["category"]
+            splitter = request.data["splitter"]
+        except KeyError:
+            res = {"code": 404, "message": "Not all keys are given. Please state: 'splitter':STRING, 'category': STRING and 'data': STRING"}
+            return Response(data=res, status=status.HTTP_404_NOT_FOUND)
+
         # Build the category_lines dictionary, a list of lines per category
         category_lines = {}
         all_categories = []
@@ -183,7 +192,12 @@ class trainGenerator(APIView):
         category_lines[category] = lines
         n_categories = len(all_categories)
 
-        global rnn
+        ## STORE TRAINING DATA FOR DEBUG PURPOSES
+        train_data_out = {'train_data': category_lines}
+        with open('generator/train_data.txt', 'w') as file:
+            file.write(json.dumps(train_data_out))
+        ##
+
         rnn = RNN(n_letters, 128, n_letters, n_categories)
 
         n_iters = 100000
@@ -232,3 +246,11 @@ class LoadModel(APIView):
             return Response(data={"successfully loaded model."}, status=status.HTTP_200_OK)
         except Exception:
             return Response(data={"unable to load model."}, status=status.HTTP_404_NOT_FOUND)
+
+class currentTrainingData(APIView):
+
+    def get(self, request):
+
+        with open("generator/train_data.txt", "r") as file:
+            json_file = json.loads(file.read())
+        return Response(data=json_file, status=status.HTTP_200_OK)

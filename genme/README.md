@@ -1,4 +1,4 @@
-#Generate random names
+# Generate random names
 
 ### How to use (without frontend)
 * Docker has to be installed.
